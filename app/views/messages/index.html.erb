@@ -1,0 +1,47 @@
+    <% if flash[:notice] %>
+      <p class="notice"><%= flash[:notice] %></p>
+    <% end %>
+    <% if flash[:error] %>
+      <p class="error"><%= flash[:error] %></p>
+    <% end %>
+
+<h1>Новости</h1>
+
+<table>
+  <tr>
+    <th>Заголовок</th>
+    <th>Создатель</th>
+    <th>Новость</th>
+    <th>Дата создания</th>
+    <th>Рейтинг</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+
+<% @messages.each do |mes| %>
+  <tr>
+  	<% user = User.find(mes.user_id).email %>
+    <td><%= mes.name %></td>
+    <td><%= user %></td>
+    <td><%= mes.content %></td>
+    <td><%= time_ago_in_words(mes.created_at) %></td>
+    <td><%= mes.votes %></td>
+    <td><%= link_to 'Show', mes %></td>
+    <td><%= link_to 'Edit', edit_message_path(mes) if user_signed_in?%></td>
+    <td><%= link_to 'Destroy', mes, method: :delete, data: { confirm: 'Are you sure?' } if user_signed_in?%></td>
+  </tr>
+<% end %>
+
+</table>
+
+<br />
+
+<%= link_to 'Создать новость', new_message_path if user_signed_in?%>
+<%= link_to 'Список моих новостей', 'my_messages' if user_signed_in?%>
+<%= link_to 'Список всех новостей', messages_path %>
+<br />
+
+<%= link_to "Выйти", destroy_user_session_path if user_signed_in?%>
+<%= link_to "Войти", sign_in_path unless user_signed_in?%>

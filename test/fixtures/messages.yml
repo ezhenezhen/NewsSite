@@ -1,0 +1,26 @@
+# == Schema Information
+#
+# Table name: messages
+#
+#  id         :integer          not null, primary key
+#  name       :string(255)
+#  content    :text
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  up_votes   :integer          default(0), not null
+#  down_votes :integer          default(0), not null
+#  user_id    :integer
+#  votes      :integer
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: 
+  user: 
+  content: MyText
+
+two:
+  name: 
+  user: 
+  content: MyText

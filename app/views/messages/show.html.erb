@@ -1,0 +1,27 @@
+    <% if flash[:notice] %>
+      <p class="notice"><%= flash[:notice] %></p>
+    <% end %>
+    <% if flash[:error] %>
+      <p class="error"><%= flash[:error] %></p>
+    <% end %>
+<p>
+  <b>Заголовок:</b>
+  <%= @message.name %>
+</p>
+
+<p>
+  <b>Новость:</b>
+  <%= @message.content %>
+</p>
+
+<p>
+  <b>Рейтинг:</b>
+  	<div id="votes"><%= @message.votes %></div>
+</p>
+
+
+<%= link_to 'Edit', edit_message_path(@message) %> |
+<%= link_to 'Back', messages_path %>
+<br /><br /><br />
+<%= link_to "+", "/message/upvote?id=#{@message.id}", :remote => true %>
+<%= link_to "-", "/message/downvote?id=#{@message.id}", :remote => true %>
